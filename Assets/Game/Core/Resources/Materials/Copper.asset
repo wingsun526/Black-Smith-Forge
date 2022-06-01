@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c15f27ac5924291855757f78fded329, type: 3}
+  m_Name: Copper
+  m_EditorClassIdentifier: 
+  materialName: Copper
+  materialSprite: {fileID: 21300000, guid: 5a5b44644bfafb945946eb8ecb81a533, type: 3}
+  price: 100
+  craftingTime: 2
+  fusionTimeHours: 3
+  ranks:
+  - swordRank: 0
+    listOfSwords:
+    - {fileID: 11400000, guid: 857db6478f519d94a90dc564ae6fd87e, type: 2}
+  - swordRank: 1
+    listOfSwords:
+    - {fileID: 11400000, guid: 924e8578e25b51d478a3d03762636b92, type: 2}
+    - {fileID: 11400000, guid: 64914be59fc23974f959e87af076a41f, type: 2}
+    - {fileID: 11400000, guid: 7a60586e40b517d46970f3481ea5c8fe, type: 2}
+  - swordRank: 2
+    listOfSwords:
+    - {fileID: 11400000, guid: 01d29582c4d24054f82eb21c4e0268b0, type: 2}
+    - {fileID: 11400000, guid: 3a897628b1d0cb94983e13515053473a, type: 2}
+    - {fileID: 11400000, guid: 894032a672fbe8748bd36b0713634e60, type: 2}
+  - swordRank: 3
+    listOfSwords:
+    - {fileID: 11400000, guid: 72969a1b3d6e3e24c97f8d3e01543c10, type: 2}
+    - {fileID: 11400000, guid: dc2a26e35d6f35245983e4d0d9b6f15a, type: 2}
+    - {fileID: 11400000, guid: ac53f5f9d18a12d42a6c07b23171d46b, type: 2}
