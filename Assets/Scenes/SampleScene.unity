@@ -970,7 +970,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1256,6 +1256,7 @@ GameObject:
   - component: {fileID: 403522785}
   - component: {fileID: 403522784}
   - component: {fileID: 403522782}
+  - component: {fileID: 403522788}
   - component: {fileID: 403522783}
   m_Layer: 5
   m_Name: Shop UI
@@ -1263,7 +1264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!225 &403522782
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1292,6 +1293,7 @@ MonoBehaviour:
   moneySystem: {fileID: 1684035906}
   sellButton: {fileID: 1693334231}
   swordDropdown: {fileID: 1677241102}
+  bDropdownOpen: 0
 --- !u!114 &403522784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,6 +1376,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &403522788
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403522781}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c313d96e8ca5f0e41bca759bce38a85e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &454871096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,7 +1505,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2106,7 +2127,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 815073588}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 403522788}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: show
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &815073588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2399,7 +2432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1054120922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2983,7 +3016,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1293865086}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 403522788}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: hide
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1293865086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3584,6 +3629,7 @@ GameObject:
   - component: {fileID: 1472740679}
   - component: {fileID: 1472740678}
   - component: {fileID: 1472740677}
+  - component: {fileID: 1472740680}
   m_Layer: 5
   m_Name: Template
   m_TagString: Untagged
@@ -3680,6 +3726,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472740675}
   m_CullTransparentMesh: 1
+--- !u!114 &1472740680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472740675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df1e7c7f0af87840a7be70d6893d613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  self: {fileID: 1472740675}
+  controller: {fileID: 403522781}
 --- !u!1 &1477010782
 GameObject:
   m_ObjectHideFlags: 0

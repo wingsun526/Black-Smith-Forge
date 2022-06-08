@@ -13,6 +13,8 @@ public class ShopUI : MonoBehaviour
 
     [SerializeField] Dropdown swordDropdown;
 
+    public bool bDropdownOpen = false; // this bool is controlled by the DropdownOpenScript on the dropdown that tells if it exists 
+
     private void Start()
     {
         ResetSwordDropdown();
@@ -42,7 +44,6 @@ public class ShopUI : MonoBehaviour
     }
     private void ResetSwordDropdown()
     {
-        Debug.Log("dropdown resseted");
         swordDropdown.ClearOptions();
         var theInventory = swordInventory.GetSwordInventory();
         var listOfOptionDatas = new List<Dropdown.OptionData>();
@@ -64,6 +65,13 @@ public class ShopUI : MonoBehaviour
 
         swordDropdown.AddOptions(listOfOptionDatas);
         swordDropdown.RefreshShownValue();
+        if(bDropdownOpen)
+        {
+            swordDropdown.enabled = false;
+            swordDropdown.enabled = true;
+            swordDropdown.Show();
+        }
+        
         //Debug.Log(listOfOptionDatas.Count);
         if(listOfOptionDatas.Count < 1)
         {
