@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Prehistoric Vow
   m_EditorClassIdentifier: 
   swordName: Prehistoric Vow
-  swordSprite: {fileID: 0}
+  swordSprite: {fileID: 21300000, guid: 32636514642f88446b6ded43f1c9cc2b, type: 3}
   swordRank: 3
   Stars: 6
   swordElement: 2

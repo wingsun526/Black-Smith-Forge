@@ -6,11 +6,11 @@ using Material = UI.Material;
 
 namespace Core
 {
-    public class Inventory : MonoBehaviour
+    public class MaterialInventory : MonoBehaviour
     {
         [SerializeField] private MaterialDictionary materialDictionary;
        
-        private Dictionary<string, int> materialInventory;
+        private Dictionary<string, int> materialInventory = null;
         
 
         public event Action onInventoryChanged;
@@ -41,12 +41,14 @@ namespace Core
             onInventoryChanged();
         }
         
+        //Directly exposing the dictionary, DANGEROUS!!
+        // Maybe changing to return a list of entries in the future.
         public Dictionary<string, int> GetMaterialInventory()
         {
             SetupMaterialInventory();
             return materialInventory;
         }
-        // Set up your inventory, there should be part for swords and materials. maybe two seperate inventories, one for each, loop through all possible material and sword.
+        
         private void SetupMaterialInventory()
         {
             if (materialInventory != null) return;

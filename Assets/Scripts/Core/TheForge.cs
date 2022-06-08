@@ -13,19 +13,27 @@ public class TheForge : MonoBehaviour
     [SerializeField] private MaterialDictionary materialDictionary;
     [SerializeField] DropdownUI dropdownUI;
     [SerializeField] private Image productSwordImage;
-    [SerializeField] private Inventory inventory;
+    [SerializeField] private MaterialInventory materialInventory;
+    [SerializeField] private SwordInventory swordInventory;
 
+    [Header("UI")]
+    [SerializeField] private Button forgeButton;
     [SerializeField] private Slider forgeProgressBar;
+    
     private int rankDBasePercentage = 40;
     private int rankCBasePercentage = 40;
     private int rankBBasePercentage = 20;
 
     private string materialToBeForge;
+    private bool isForging = false;
     
     
     
     public void OnForgeButtonClick()
     {
+        if (isForging) return;
+        
+        
         AcquireMaterialToBeForge();
         if(materialToBeForge == "")
         {
@@ -42,9 +50,21 @@ public class TheForge : MonoBehaviour
     
     private IEnumerator ForgingSwordPleaseWait()
     {
+        isForging = true; 
+        
+        // change the button's highlighted and pressed color so it appears to be non responsive, without the need to directly setting the button inactive.
+        Color originalHightedColor = forgeButton.colors.highlightedColor;
+        Color originalPressedColor = forgeButton.colors.pressedColor;
+        ColorBlock colorVar = forgeButton.colors;
+        colorVar.highlightedColor = Color.white;
+        colorVar.pressedColor = Color.white;
+        forgeButton.colors = colorVar;
+        //
+        
         float craftingTime = materialDictionary.GetMaterial(materialToBeForge).GetCraftingTime();
         float elapsedTime = 0f;
         
+        //forgeButton.interactable = false;
         while (elapsedTime < craftingTime)
         {
             elapsedTime += Time.deltaTime;
@@ -53,8 +73,18 @@ public class TheForge : MonoBehaviour
         }
         
         Sword sword = ForgeThisMaterial(materialToBeForge);
+        swordInventory.AddSwordToInventory(sword);
         Debug.Log(sword.GetSwordName());
         productSwordImage.sprite = sword.GetSwordSprite();
+        //forgeButton.interactable = true;
+        
+        // button's color return back to normal
+        colorVar.highlightedColor = originalHightedColor;
+        colorVar.pressedColor = originalPressedColor;
+        forgeButton.colors = colorVar;
+        //
+        
+        isForging = false;
     }
     
     private void AcquireMaterialToBeForge()
@@ -65,7 +95,7 @@ public class TheForge : MonoBehaviour
     private bool DecrementMaterial(string material)
     {
         bool decrementMaterialSuccess;
-        inventory.DecrementSelectedMaterial(material, out decrementMaterialSuccess);
+        materialInventory.DecrementSelectedMaterial(material, out decrementMaterialSuccess);
         return decrementMaterialSuccess;
     }
     private Sword ForgeThisMaterial(string material)

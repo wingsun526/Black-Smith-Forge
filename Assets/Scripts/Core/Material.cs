@@ -36,6 +36,20 @@ namespace UI
             return swordLookUpTable[swordRank];
         }
         
+        public List<Sword> GetAllPossibleSwords()
+        {
+            List<Sword> allSwords = new List<Sword>();
+            foreach (var rank in ranks)
+            {
+                foreach (var sword in rank.listOfSwords)
+                {
+                    allSwords.Add(sword);
+                }
+            }
+
+            return allSwords;
+        }
+        
         private void BuildLookUpTable()
         {
             if (swordLookUpTable != null) return;

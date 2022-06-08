@@ -12,12 +12,12 @@ using Material = UI.Material;
 
 public class DropdownUI : MonoBehaviour
 {
-    [SerializeField] private Inventory inventory;
+    [SerializeField] private MaterialInventory materialInventory;
     [SerializeField] private MaterialDictionary materialDictionary;
     [SerializeField] private Button forgeButton;
 
-    [Header("UI")] 
-    [SerializeField] private Sprite defaultCaptionSprite;
+    // [Header("UI")] 
+    // [SerializeField] private Sprite defaultCaptionSprite;
         
     private Dropdown dropdown;
 
@@ -34,12 +34,12 @@ public class DropdownUI : MonoBehaviour
 
     private void OnEnable()
     {
-        inventory.onInventoryChanged += ResetDropdownmenu;
+        materialInventory.onInventoryChanged += ResetDropdownmenu;
     }
 
     private void OnDisable()
     {
-        inventory.onInventoryChanged -= ResetDropdownmenu;
+        materialInventory.onInventoryChanged -= ResetDropdownmenu;
     }
 
     // Update is called once per frame
@@ -50,12 +50,13 @@ public class DropdownUI : MonoBehaviour
     
     public string GetMaterialToBeForge()
     {
-        return dropdown.captionText.text;
+        //return dropdown.captionText.text;
+        return dropdown.options[dropdown.value].text;
     }
     private void ResetDropdownmenu()
     {
         dropdown.ClearOptions();
-        var theInventory = inventory.GetMaterialInventory();
+        var theInventory = materialInventory.GetMaterialInventory(); // directly accessing the dictionary, DANGEROUS!!
         var listOfOptionDatas = new List<Dropdown.OptionData>();
         
         foreach (var item in theInventory)
@@ -77,9 +78,11 @@ public class DropdownUI : MonoBehaviour
         if(listOfOptionDatas.Count < 1)
         {
             dropdown.captionText.text = "Buy More Material";
-            dropdown.captionImage.sprite = defaultCaptionSprite;
+            // dropdown.captionImage.enabled = true;  // image is disabled by default if dropdown list is empty, 
+            // dropdown.captionImage.sprite = defaultCaptionSprite;
         }
-        
+        //experimental
+        //dropdown.captionImage.sprite = null;
     }
     
     

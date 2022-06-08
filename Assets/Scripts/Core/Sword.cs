@@ -26,5 +26,10 @@ namespace UI
         {
             return swordSprite;
         }
+        
+        public int GetSellPrice()
+        {
+            return sellPrice;
+        }
     }
 }

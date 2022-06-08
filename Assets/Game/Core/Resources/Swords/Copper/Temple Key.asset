@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Temple Key
   m_EditorClassIdentifier: 
   swordName: Temple Key
-  swordSprite: {fileID: 0}
+  swordSprite: {fileID: 21300000, guid: 1544ab187b0bf914dabf8cc91eb1034d, type: 3}
   swordRank: 3
   Stars: 6
   swordElement: 1
