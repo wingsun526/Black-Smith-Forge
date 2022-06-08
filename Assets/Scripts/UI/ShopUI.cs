@@ -42,6 +42,7 @@ public class ShopUI : MonoBehaviour
     }
     private void ResetSwordDropdown()
     {
+        Debug.Log("dropdown resseted");
         swordDropdown.ClearOptions();
         var theInventory = swordInventory.GetSwordInventory();
         var listOfOptionDatas = new List<Dropdown.OptionData>();
@@ -62,9 +63,11 @@ public class ShopUI : MonoBehaviour
         
 
         swordDropdown.AddOptions(listOfOptionDatas);
+        swordDropdown.RefreshShownValue();
         //Debug.Log(listOfOptionDatas.Count);
         if(listOfOptionDatas.Count < 1)
         {
+            //Debug.Log("does it work the first time");
             swordDropdown.captionText.text = "empty inventory";
             // dropdown.captionImage.enabled = true;  // image is disabled by default if dropdown list is empty, 
             // dropdown.captionImage.sprite = defaultCaptionSprite;

@@ -53,6 +53,8 @@ public class DropdownUI : MonoBehaviour
         //return dropdown.captionText.text;
         return dropdown.options[dropdown.value].text;
     }
+    
+    
     private void ResetDropdownmenu()
     {
         dropdown.ClearOptions();
