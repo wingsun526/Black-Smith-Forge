@@ -15,6 +15,7 @@ public class ShopUI : MonoBehaviour
 
     public bool bDropdownOpen = false; // this bool is controlled by the DropdownOpenScript on the dropdown that tells if it exists 
 
+    
     private void Start()
     {
         ResetSwordDropdown();
@@ -29,6 +30,8 @@ public class ShopUI : MonoBehaviour
     {
         swordInventory.onInventoryChanged -= ResetSwordDropdown;
     }
+    
+    
     public void OnSellButtonClick()
     {
         var currentSwordToSell = GetSwordToSell();

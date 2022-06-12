@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace UI
 {
@@ -17,6 +18,29 @@ namespace UI
         [SerializeField] private int sellPrice;
         [SerializeField] private int givesEXP;
 
+        static Dictionary<string, Sword> swordLookupCache;
+
+        public static Sword GetFromNameOfSword(string nameOfSword)
+        {
+            if (swordLookupCache == null)
+            {
+                swordLookupCache = new Dictionary<string, Sword>();
+                var itemList = Resources.LoadAll<Sword>("");
+                foreach (var item in itemList)
+                {
+                    if (swordLookupCache.ContainsKey(item.swordName))
+                    {
+                        Debug.LogError(string.Format("Looks like there's a duplicate GameDevTV.UI.InventorySystem ID for objects: {0} and {1}", swordLookupCache[item.swordName], item));
+                        continue;
+                    }
+
+                    swordLookupCache[item.swordName] = item;
+                }
+            }
+
+            if (nameOfSword == null || !swordLookupCache.ContainsKey(nameOfSword)) return null;
+            return swordLookupCache[nameOfSword];
+        }
         public string GetSwordName()
         {
             return swordName;
