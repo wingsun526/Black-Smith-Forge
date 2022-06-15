@@ -6,14 +6,12 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] private int inventorySize = 8;
-    private Sword[] slots;
+    [SerializeField] private PlayerInventory playerInventory;
+
 
     private void Awake()
     {
-        slots = new Sword[inventorySize];
-        slots[1] = Sword.GetFromNameOfSword("Copper Sword");
-        
+        playerInventory.inventoryUpdated += Redraw;
     }
 
     private void Start()
@@ -21,12 +19,14 @@ public class InventoryUI : MonoBehaviour
         Redraw();
     }
 
+    
     private void Redraw()
     {
         var list = GetComponentsInChildren<InventorySlotUI>();
-        for(int i = 0; i < slots.Length; i++)
+        var theInventory = playerInventory.GetArray();
+        for(int i = 0; i < theInventory.Length; i++)
         {
-            list[i].Setup(slots[i]);
+            list[i].Setup(theInventory[i]);
         }
     }
 }

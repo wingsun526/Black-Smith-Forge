@@ -14,7 +14,8 @@ public class TheForge : MonoBehaviour
     [SerializeField] DropdownUI dropdownUI;
     [SerializeField] private Image productSwordImage;
     [SerializeField] private MaterialInventory materialInventory;
-    [SerializeField] private SwordInventory swordInventory;
+    //[SerializeField] private SwordInventory swordInventory;
+    [SerializeField] private PlayerInventory playerInventory;
 
     [Header("UI")]
     [SerializeField] private Button forgeButton;
@@ -73,8 +74,10 @@ public class TheForge : MonoBehaviour
         }
         
         Sword sword = ForgeThisMaterial(materialToBeForge);
-        swordInventory.AddSwordToInventory(sword);
+        //swordInventory.AddSwordToInventory(sword);
+        playerInventory.AddToInventory(sword);
         Debug.Log(sword.GetSwordName());
+        
         productSwordImage.sprite = sword.GetSwordSprite();
         //forgeButton.interactable = true;
         
