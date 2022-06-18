@@ -34,6 +34,12 @@ public class TheForge : MonoBehaviour
     {
         if (isForging) return;
         
+        // Check if Inventory is full
+        if (playerInventory.IsFull())
+        {
+            print("inventory is full");
+            return;
+        }
         
         AcquireMaterialToBeForge();
         if(materialToBeForge == "")
@@ -74,9 +80,8 @@ public class TheForge : MonoBehaviour
         }
         
         Sword sword = ForgeThisMaterial(materialToBeForge);
-        //swordInventory.AddSwordToInventory(sword);
         playerInventory.AddToInventory(sword);
-        Debug.Log(sword.GetSwordName());
+        //Debug.Log(sword.GetSwordName());
         
         productSwordImage.sprite = sword.GetSwordSprite();
         //forgeButton.interactable = true;

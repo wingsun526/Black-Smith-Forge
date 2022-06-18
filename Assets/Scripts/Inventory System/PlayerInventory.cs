@@ -8,15 +8,15 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize = 8;
+    [SerializeField] private MoneySystem moneySystem;
     private Sword[] slots;
     
     public event Action inventoryUpdated;
     private void Awake()
     {
         slots = new Sword[inventorySize];
-        slots[1] = Sword.GetFromNameOfSword("Copper Sword");
         slots[5] = Sword.GetFromNameOfSword("Copper Sword");
-
+        
     }
 
     public int GetSize()
@@ -27,6 +27,11 @@ public class PlayerInventory : MonoBehaviour
     public Sword[] GetArray()
     {
         return slots.ToArray();
+    }
+    
+    public bool IsFull()
+    {
+        return FindNextEmptySlot() == -1;
     }
     
     public void AddToInventory(Sword sword)
@@ -45,6 +50,33 @@ public class PlayerInventory : MonoBehaviour
             throw new Exception("no more space left");
         }
     }
+    
+    public void SellFromInventory(int index)
+    {
+        var item = slots[index];
+        if (item == null)
+        {
+            throw new Exception("found you");
+        }
+        moneySystem.AddGold(slots[index].GetSellPrice());
+        RemoveFromInventory(index);
+        
+    }
+    
+    private void RemoveFromInventory(int index)
+    {
+        if (slots[index] == null)
+        {
+            print("no item to remove");
+        }
+        else
+        {
+            print(slots[index].GetSwordName() + " is removed");
+            slots[index] = null;
+            MoveAllToFront();
+            inventoryUpdated();
+        }
+    }
     private int FindNextEmptySlot()
     {
         for (int i = 0; i < inventorySize; i++)
@@ -56,4 +88,19 @@ public class PlayerInventory : MonoBehaviour
         }
         return -1;
     }
+    
+    private void MoveAllToFront()
+    {
+        int tempIndex = 0;
+        for(int i = 0; i < slots.Length; i++)
+        {
+            if(slots[i] != null)
+            {
+                (slots[i], slots[tempIndex]) = (slots[tempIndex], slots[i]);
+                tempIndex++;
+            }
+        }
+    }
+    
+   
 }

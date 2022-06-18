@@ -90,6 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 8977883432783522201}
+  defaultSprite: {fileID: 21300000, guid: 83069f538d9e0604a8bed52715d594c0, type: 3}
+  highlightedSprite: {fileID: 21300000, guid: db174bb7882c2384bbad79bbafd59474, type: 3}
 --- !u!1001 &4024342471230583173
 PrefabInstance:
   m_ObjectHideFlags: 0
