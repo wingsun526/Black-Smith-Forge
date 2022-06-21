@@ -25,7 +25,7 @@ namespace UI
             if (swordLookupCache == null)
             {
                 swordLookupCache = new Dictionary<string, Sword>();
-                var itemList = Resources.LoadAll<Sword>("");
+                var itemList = Resources.LoadAll<Sword>("SwordsSO");
                 foreach (var item in itemList)
                 {
                     if (swordLookupCache.ContainsKey(item.swordName))
