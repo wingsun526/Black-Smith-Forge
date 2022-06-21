@@ -13,7 +13,6 @@ using Material = UI.Material;
 public class DropdownUI : MonoBehaviour
 {
     [SerializeField] private MaterialInventory materialInventory;
-    [SerializeField] private MaterialDictionary materialDictionary;
     [SerializeField] private Button forgeButton;
 
     // [Header("UI")] 
@@ -64,9 +63,8 @@ public class DropdownUI : MonoBehaviour
         foreach (var item in theInventory)
         {
             if (item.Value < 1) continue;
-            
             var currentData = new Dropdown.OptionData();
-            Material currentMaterial = materialDictionary.GetMaterial(item.Key);
+            Material currentMaterial = Material.GetFromNameOfMaterial(item.Key);
             currentData.text = currentMaterial.GetMaterialName();
             currentData.image = currentMaterial.GetMaterialSprite();
 

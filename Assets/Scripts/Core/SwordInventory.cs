@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using Core;
 using UI;
 using UnityEngine;
+using Material = UI.Material;
 
 public class SwordInventory : MonoBehaviour
 {
-    [SerializeField] private MaterialDictionary materialDictionary;
-           
     private Dictionary<string, int> swordInventory = null;
     private Dictionary<string, Sword> swordDictionary = null; // a Dictionary for getting the corresponding sword scriptable object.
 
@@ -64,9 +63,9 @@ public class SwordInventory : MonoBehaviour
     {
         if (swordInventory != null) return;
         swordInventory = new Dictionary<string, int>();
-        foreach (var material in materialDictionary.GetListOfMaterials())
+        foreach (var material in Material.GetListOfMaterials())
         {
-            foreach (var sword in material.GetAllPossibleSwords() )
+            foreach (var sword in Material.GetFromNameOfMaterial(material).GetAllPossibleSwords() )
             {
                 swordInventory[sword.GetSwordName()] = 0;
             }
@@ -76,9 +75,9 @@ public class SwordInventory : MonoBehaviour
     {
         if (swordDictionary != null) return;
         swordDictionary = new Dictionary<string, Sword>();
-        foreach (var material in materialDictionary.GetListOfMaterials())
+        foreach (var material in Material.GetListOfMaterials())
         {
-            foreach (var sword in material.GetAllPossibleSwords() )
+            foreach (var sword in Material.GetFromNameOfMaterial(material).GetAllPossibleSwords() )
             {
                 swordDictionary[sword.GetSwordName()] = sword;
             }

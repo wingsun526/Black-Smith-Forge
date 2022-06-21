@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace UI
 {
     [CreateAssetMenu(fileName = "FILENAME", menuName = "New Material", order = 0)]
-    public class Material : ScriptableObject
+    public class  Material : ScriptableObject
     {
         [SerializeField] private string materialName;
         [SerializeField] private Sprite materialSprite;
@@ -14,7 +15,7 @@ namespace UI
         [SerializeField] private float fusionTimeHours;
         [SerializeField] private AllSwordsInThisRank[] ranks = null;
 
-        static Dictionary<string, Material> materialLookupCache;
+        private static Dictionary<string, Material> materialLookupCache;
         
         private Dictionary<SwordRank, Sword[]> swordLookUpTable = null;
 
@@ -22,23 +23,30 @@ namespace UI
         {
             if (materialLookupCache == null)
             {
-                materialLookupCache = new Dictionary<string, Material>();
-                var itemList = Resources.LoadAll<Material>("MaterialSO");
-                foreach (var item in itemList)
-                {
-                    if (materialLookupCache.ContainsKey(item.materialName))
-                    {
-                        Debug.LogError(string.Format("Looks like there's a duplicate GameDevTV.UI.InventorySystem ID for objects: {0} and {1}", materialLookupCache[item.materialName], item));
-                        continue;
-                    }
-        
-                    materialLookupCache[item.materialName] = item;
-                }
+                BuildMaterialLookupCache();
             }
-        
             if (nameOfMaterial == null || !materialLookupCache.ContainsKey(nameOfMaterial)) return null;
             return materialLookupCache[nameOfMaterial];
         }
+
+        public static List<string> GetListOfMaterials()
+        {
+            if (materialLookupCache == null)
+            {
+                BuildMaterialLookupCache();
+            }
+
+            var theList = new List<string>();
+            foreach (KeyValuePair<string,Material> keyValuePair in materialLookupCache)
+            {
+                theList.Add(keyValuePair.Key);
+            }
+
+            return theList;
+        }
+            
+
+        
         public string GetMaterialName()
         {
             return materialName;
@@ -55,7 +63,7 @@ namespace UI
         }
         public Sword[] GetSwordsInThisRank(SwordRank swordRank)
         {
-            BuildLookUpTable();
+            BuildSwordLookUpTable();
             return swordLookUpTable[swordRank];
         }
         
@@ -73,7 +81,26 @@ namespace UI
             return allSwords;
         }
         
-        private void BuildLookUpTable()
+        private static void BuildMaterialLookupCache()
+        {
+            if (materialLookupCache != null) return;
+            
+            materialLookupCache = new Dictionary<string, Material>();
+            var itemList = Resources.LoadAll<Material>("MaterialsSO");
+            foreach (var item in itemList)
+            {
+                if (materialLookupCache.ContainsKey(item.materialName))
+                {
+                    Debug.LogError(string.Format(
+                        "Looks like there's a duplicate GameDevTV.UI.InventorySystem ID for objects: {0} and {1}",
+                        materialLookupCache[item.materialName], item));
+                    continue;
+                }
+
+                materialLookupCache[item.materialName] = item;
+            }
+        }
+        private void BuildSwordLookUpTable()
         {
             if (swordLookUpTable != null) return;
             swordLookUpTable = new Dictionary<SwordRank, Sword[]>();

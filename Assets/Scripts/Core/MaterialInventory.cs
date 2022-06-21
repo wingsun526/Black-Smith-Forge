@@ -8,8 +8,6 @@ namespace Core
 {
     public class MaterialInventory : MonoBehaviour
     {
-        [SerializeField] private MaterialDictionary materialDictionary;
-       
         private Dictionary<string, int> materialInventory = null;
         
 
@@ -53,10 +51,10 @@ namespace Core
         {
             if (materialInventory != null) return;
             materialInventory = new Dictionary<string, int>();
-            Material[] listOfMaterials = materialDictionary.GetListOfMaterials();
-            foreach (Material material in listOfMaterials)
+            var listOfMaterials = Material.GetListOfMaterials();
+            foreach (string material in listOfMaterials)
             {
-                materialInventory[material.GetMaterialName()] = 0;
+                materialInventory[material] = 0;
             }
         }
         

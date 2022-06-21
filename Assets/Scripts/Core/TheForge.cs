@@ -10,7 +10,6 @@ using Random = UnityEngine.Random;
 
 public class TheForge : MonoBehaviour
 {
-    [SerializeField] private MaterialDictionary materialDictionary;
     [SerializeField] DropdownUI dropdownUI;
     [SerializeField] private Image productSwordImage;
     [SerializeField] private MaterialInventory materialInventory;
@@ -68,7 +67,7 @@ public class TheForge : MonoBehaviour
         forgeButton.colors = colorVar;
         //
         
-        float craftingTime = materialDictionary.GetMaterial(materialToBeForge).GetCraftingTime();
+        float craftingTime = Material.GetFromNameOfMaterial(materialToBeForge).GetCraftingTime();
         float elapsedTime = 0f;
         
         //forgeButton.interactable = false;
@@ -109,7 +108,7 @@ public class TheForge : MonoBehaviour
     private Sword ForgeThisMaterial(string material)
     {
         SwordRank swordRank = GenerateProductRank(0);
-        Sword[] theArrayOfPossibleSwords = materialDictionary.GetMaterial(material).GetSwordsInThisRank(swordRank);
+        Sword[] theArrayOfPossibleSwords = Material.GetFromNameOfMaterial(material).GetSwordsInThisRank(swordRank);
         return GenerateSword(theArrayOfPossibleSwords);
     }
     private SwordRank GenerateProductRank(int oreMasteryLevel)
