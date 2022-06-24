@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c15f27ac5924291855757f78fded329, type: 3}
-  m_Name: Bronze
+  m_Name: Iron
   m_EditorClassIdentifier: 
-  materialName: Bronze
-  materialSprite: {fileID: 7313205313559809716, guid: 04c20f59654abae4799886c1ae02dbd1, type: 3}
-  materialSortingOrder: 1
-  price: 200
-  craftingTime: 4
-  fusionTimeHours: 4
+  materialName: Iron
+  materialSprite: {fileID: -3486343108256359627, guid: 04c20f59654abae4799886c1ae02dbd1, type: 3}
+  materialSortingOrder: 2
+  price: 500
+  craftingTime: 6
+  fusionTimeHours: 5
   ranks: []

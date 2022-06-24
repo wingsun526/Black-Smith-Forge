@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c15f27ac5924291855757f78fded329, type: 3}
-  m_Name: Bronze
+  m_Name: Adamantite
   m_EditorClassIdentifier: 
-  materialName: Bronze
-  materialSprite: {fileID: 7313205313559809716, guid: 04c20f59654abae4799886c1ae02dbd1, type: 3}
-  materialSortingOrder: 1
-  price: 200
-  craftingTime: 4
-  fusionTimeHours: 4
+  materialName: Adamantite
+  materialSprite: {fileID: -1840033748654024010, guid: 04c20f59654abae4799886c1ae02dbd1, type: 3}
+  materialSortingOrder: 5
+  price: 5000
+  craftingTime: 72
+  fusionTimeHours: 12
   ranks: []

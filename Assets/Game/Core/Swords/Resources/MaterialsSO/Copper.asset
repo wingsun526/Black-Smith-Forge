@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Copper
   m_EditorClassIdentifier: 
   materialName: Copper
-  materialSprite: {fileID: 21300000, guid: 5a5b44644bfafb945946eb8ecb81a533, type: 3}
+  materialSprite: {fileID: 5126255681409469216, guid: 04c20f59654abae4799886c1ae02dbd1, type: 3}
   price: 100
   craftingTime: 2
   fusionTimeHours: 3

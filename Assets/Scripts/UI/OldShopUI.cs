@@ -5,7 +5,7 @@ using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopUI : MonoBehaviour
+public class OldShopUI : MonoBehaviour
 {
     [SerializeField] private SwordInventory swordInventory;
     [SerializeField] private MoneySystem moneySystem;

@@ -21,7 +21,7 @@ public class InventoryUI : MonoBehaviour
         Redraw();
     }
     
-    public void OnOpenShopButtonClick()
+    public void OnOpenInventoryButtonClick()
     {
         Redraw();
     }

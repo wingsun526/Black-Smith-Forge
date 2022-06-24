@@ -1,0 +1,25 @@
+﻿
+- ore shop
+    ore shop UI
+    ore Inventory being stackable
+    show number of ores visually
+    max number of ores
+    
+    
+- ore unlock system
+
+
+
+
+
+
+
+
+
+
+
+
+
+For Later:
+- Material Mastery
+- Sorting Options for sword inventory/player inventory

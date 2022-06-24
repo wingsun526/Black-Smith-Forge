@@ -16,7 +16,7 @@ public class DropdownOpenScript : MonoBehaviour
             //ControllScript is my main script controlling my program opperation.
             //It contains a public boolean bDropdownOpen to indicate whether the
             //dropdown list is open or not
-            controller.GetComponent<ShopUI>().bDropdownOpen = true;
+            controller.GetComponent<OldShopUI>().bDropdownOpen = true;
         }
     }
 
@@ -24,7 +24,7 @@ public class DropdownOpenScript : MonoBehaviour
     {
         if (self.name == "Dropdown List")
         {
-            controller.GetComponent<ShopUI>().bDropdownOpen = false;
+            controller.GetComponent<OldShopUI>().bDropdownOpen = false;
         }
     }
 }

@@ -12,19 +12,15 @@ namespace Core
         
 
         public event Action onInventoryChanged;
-        // Start is called before the first frame update
+        
         void Start()
         {
             SetupMaterialInventory();
             materialInventory["Copper"] = 3;
-            // materialInventory["Bronze"] = 1;
+            materialInventory["Bronze"] = 1;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
         
-        }
         public void DecrementSelectedMaterial(string material, out bool success)
         {
             if(materialInventory[material] < 1)

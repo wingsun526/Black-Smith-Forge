@@ -10,6 +10,7 @@ namespace UI
     {
         [SerializeField] private string materialName;
         [SerializeField] private Sprite materialSprite;
+        [SerializeField] private int materialSortingOrder;
         [SerializeField] private int price;
         [SerializeField] private float craftingTime;
         [SerializeField] private float fusionTimeHours;
@@ -55,6 +56,16 @@ namespace UI
         public Sprite GetMaterialSprite()
         {
             return materialSprite;
+        }
+        
+        public int GetSortingOrder()
+        {
+            return materialSortingOrder;
+        }
+        
+        public int GetPrice()
+        {
+            return price;
         }
         
         public float GetCraftingTime()
