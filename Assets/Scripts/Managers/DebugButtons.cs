@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core;
 using UnityEngine;
 
 public class DebugButtons : MonoBehaviour
@@ -42,7 +43,7 @@ public class DebugButtons : MonoBehaviour
             //
             // // or this,  if your code needs to be longer
             // new DebugButton("Boss", () => { EnemyManagerLocator.GetCurrentEnemyManager.SpawnBoss(); }),
-            new DebugButton("Testing", () => { Debug.Log(transform.childCount);})
+            
         });
     }
 

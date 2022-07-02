@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,23 @@ public class MoneySystem : MonoBehaviour
     public void AddGold(int amount)
     {
         gold += amount;
+    }
+    
+    public void SubtractGold(int amount)
+    {
+        if(HasMoney(amount))
+        {
+            gold -= amount;
+        }
+        else
+        {
+            throw new Exception("not enough money");
+        }
+    }
+    
+    public bool HasMoney(int amount)
+    {
+        return gold >= amount;
     }
     //visual effect
     private void floatingText()

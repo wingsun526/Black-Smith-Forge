@@ -96,7 +96,7 @@ public class TheForge : MonoBehaviour
     
     private void AcquireMaterialToBeForge()
     {
-        materialToBeForge = dropdownUI.GetMaterialToBeForge();
+        materialToBeForge = dropdownUI.GetSelectedMaterial();
     }
     
     private bool DecrementMaterial(string material)

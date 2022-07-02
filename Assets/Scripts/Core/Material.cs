@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using UI.General_UI;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace UI
 {
     [CreateAssetMenu(fileName = "FILENAME", menuName = "New Material", order = 0)]
-    public class  Material : ScriptableObject
+    public class  Material : ScriptableObject, IDisplayableItem
     {
         [SerializeField] private string materialName;
         [SerializeField] private Sprite materialSprite;
@@ -42,6 +43,8 @@ namespace UI
             {
                 theList.Add(keyValuePair.Key);
             }
+            
+            theList.Sort((x , y) => GetFromNameOfMaterial(x).GetSortingOrder() - GetFromNameOfMaterial(y).GetSortingOrder());
 
             return theList;
         }
@@ -92,6 +95,11 @@ namespace UI
             return allSwords;
         }
         
+        // from interface
+        public Sprite GetDisplaySprite()
+        {
+            return GetMaterialSprite();
+        }
         private static void BuildMaterialLookupCache()
         {
             if (materialLookupCache != null) return;
@@ -128,5 +136,7 @@ namespace UI
             public SwordRank swordRank;
             public Sword[] listOfSwords;
         }
+
+        
     }
 }

@@ -10,13 +10,14 @@ using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 using Material = UI.Material;
 
-public class DropdownUI : MonoBehaviour
+public class  DropdownUI : MonoBehaviour
 {
     [SerializeField] private MaterialInventory materialInventory;
     [SerializeField] private Button forgeButton;
 
     // [Header("UI")] 
     // [SerializeField] private Sprite defaultCaptionSprite;
+    [SerializeField] private Text materialCount;
         
     private Dropdown dropdown;
 
@@ -24,6 +25,7 @@ public class DropdownUI : MonoBehaviour
     private void Awake()
     {
         dropdown = GetComponent<Dropdown>();
+        dropdown.onValueChanged.AddListener(OnDropDownValueSelected);
     }
 
     void Start()
@@ -47,17 +49,28 @@ public class DropdownUI : MonoBehaviour
         
     }
     
-    public string GetMaterialToBeForge()
+    public string GetSelectedMaterial()
     {
         //return dropdown.captionText.text;
         return dropdown.options[dropdown.value].text;
     }
     
+    private void OnDropDownValueSelected(int index)
+    {
+        ChangeSelectedMaterialInfo();
+    }
     
+    private void ChangeSelectedMaterialInfo()
+    {
+        var count = materialInventory.GetNumberOfThisMaterial(GetSelectedMaterial());
+        materialCount.text = count.ToString();
+        print(count);
+    }
     private void ResetDropdownmenu()
     {
         dropdown.ClearOptions();
-        var theInventory = materialInventory.GetMaterialInventory(); // directly accessing the dictionary, DANGEROUS!!
+        var theInventory = materialInventory.GetMaterialInventory();
+        theInventory.Sort((x , y) => Material.GetFromNameOfMaterial(x.Key).GetSortingOrder() - Material.GetFromNameOfMaterial(y.Key).GetSortingOrder());
         var listOfOptionDatas = new List<Dropdown.OptionData>();
         
         foreach (var item in theInventory)
@@ -83,6 +96,7 @@ public class DropdownUI : MonoBehaviour
         }
         //experimental
         //dropdown.captionImage.sprite = null;
+        
     }
     
     

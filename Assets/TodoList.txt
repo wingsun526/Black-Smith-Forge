@@ -1,7 +1,6 @@
 ﻿
 - ore shop
-    ore shop UI
-    ore Inventory being stackable
+    
     show number of ores visually
     max number of ores
     
@@ -9,7 +8,7 @@
 - ore unlock system
 
 
-
+- Forge dropdown list no flashing
 
 
 

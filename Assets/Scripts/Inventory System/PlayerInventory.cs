@@ -15,7 +15,7 @@ public class PlayerInventory : MonoBehaviour
     private void Awake()
     {
         slots = new Sword[inventorySize];
-        slots[5] = Sword.GetFromNameOfSword("Copper Sword");
+        //slots[5] = Sword.GetFromNameOfSword("Copper Sword");
         
     }
 
@@ -71,7 +71,7 @@ public class PlayerInventory : MonoBehaviour
         }
         else
         {
-            print(slots[index].GetSwordName() + " is removed");
+            //print(slots[index].GetSwordName() + " is removed");
             slots[index] = null;
             MoveAllToFront();
             inventoryUpdated();
