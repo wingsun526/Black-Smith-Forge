@@ -1,14 +1,15 @@
 ﻿
 - ore shop
-    
-    show number of ores visually
-    max number of ores
-    
-    
+
+  ~~show number of ores visually~~
+
+  max number of ores
+
+
 - ore unlock system
 
 
-- Forge dropdown list no flashing
+- ~~Forge dropdown list no flashing~~
 
 
 

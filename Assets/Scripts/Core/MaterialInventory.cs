@@ -7,7 +7,7 @@ using Material = UI.Material;
 
 namespace Core
 {
-    public class MaterialInventory : MonoBehaviour//, IInventory
+    public class MaterialInventory : MonoBehaviour, IInventory
     {
         // Is Dictionary the best option, since you always need this inventory to be in order?
         // almost all the time you will need to sort it before returning, would an array with 
@@ -15,12 +15,19 @@ namespace Core
         private Dictionary<string, int> materialInventory = null;
         
 
-        public event Action onInventoryChanged;
-        
+        public event Action OnInventoryChanged;
+
+        private void Awake()
+        {
+            
+        }
+
+        // possible race condtion
         void Start()
         {
             SetupMaterialInventory();
-            //materialInventory["Copper"] = 3;
+            materialInventory["Copper"] = 30;
+            //materialInventory["Bronze"] = 5;
         }
 
         
@@ -28,7 +35,7 @@ namespace Core
         public void AddMaterial(string material, int number)
         {
             materialInventory[material] += number;
-            if (onInventoryChanged != null) onInventoryChanged();
+            if (OnInventoryChanged != null) OnInventoryChanged();
         }
         
         public void DecrementSelectedMaterial(string material, out bool success)
@@ -42,7 +49,7 @@ namespace Core
 
             materialInventory[material] -= 1;
             success = true;
-            if (onInventoryChanged != null) onInventoryChanged();
+            if (OnInventoryChanged != null) OnInventoryChanged();
         }
         
         //Directly exposing the dictionary, DANGEROUS!!
@@ -84,11 +91,23 @@ namespace Core
         }
 
 
-        public List<IDisplayableItem> GetListOfItemsInOrder()
+        public List<KeyValuePair<IDisplayableItem, int>> GetListOfItemsInOrder()
         {
-            throw new NotImplementedException();
+            SetupMaterialInventory();
+            var result = new List<KeyValuePair<IDisplayableItem, int>>();
+            foreach (var item in materialInventory)
+            {
+                if(item.Value > 0)
+                {
+                    result.Add(new KeyValuePair<IDisplayableItem, int>(Material.GetFromNameOfMaterial(item.Key), item.Value));
+                }
+                
+            }
+            
+            result.Sort((x , y) => x.Key.GetDisplayOrder() - y.Key.GetDisplayOrder());
+            return result;
         }
 
-        //
+        
     }
 }

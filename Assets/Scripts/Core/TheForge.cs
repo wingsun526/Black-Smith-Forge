@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core;
+using Player;
 using UI;
+using UI.Forge_UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Material = UI.Material;
@@ -10,10 +12,11 @@ using Random = UnityEngine.Random;
 
 public class TheForge : MonoBehaviour
 {
-    [SerializeField] DropdownUI dropdownUI;
+    //[SerializeField] DropdownUI dropdownUI;
+    [SerializeField] private ForgeSelectionGrid forgeSelectionGrid;
     [SerializeField] private Image productSwordImage;
     [SerializeField] private MaterialInventory materialInventory;
-    //[SerializeField] private SwordInventory swordInventory;
+    [SerializeField] private PlayerStats playerStats;
     [SerializeField] private PlayerInventory playerInventory;
 
     [Header("UI")]
@@ -41,7 +44,7 @@ public class TheForge : MonoBehaviour
         }
         
         AcquireMaterialToBeForge();
-        if(materialToBeForge == "")
+        if(materialToBeForge == null)
         {
             throw new Exception("Please place material");
         }
@@ -80,7 +83,9 @@ public class TheForge : MonoBehaviour
         
         Sword sword = ForgeThisMaterial(materialToBeForge);
         playerInventory.AddToInventory(sword);
-        //Debug.Log(sword.GetSwordName());
+        // add exp when success
+        playerStats.GainExp(sword.GetExp());
+        
         
         productSwordImage.sprite = sword.GetSwordSprite();
         //forgeButton.interactable = true;
@@ -96,7 +101,7 @@ public class TheForge : MonoBehaviour
     
     private void AcquireMaterialToBeForge()
     {
-        materialToBeForge = dropdownUI.GetSelectedMaterial();
+        materialToBeForge = forgeSelectionGrid.GetSelectedMaterialName();
     }
     
     private bool DecrementMaterial(string material)

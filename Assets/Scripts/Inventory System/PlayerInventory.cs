@@ -15,7 +15,11 @@ public class PlayerInventory : MonoBehaviour
     private void Awake()
     {
         slots = new Sword[inventorySize];
-        //slots[5] = Sword.GetFromNameOfSword("Copper Sword");
+        slots[5] = Sword.GetFromNameOfSword("Copper Sword");
+        slots[0] = Sword.GetFromNameOfSword("Copper Sword");
+        slots[1] = Sword.GetFromNameOfSword("Copper Sword");
+        slots[2] = Sword.GetFromNameOfSword("Copper Sword");
+        slots[3] = Sword.GetFromNameOfSword("Copper Sword");
         
     }
 

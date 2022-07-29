@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core;
+using Player;
 using UnityEngine;
 using Material = UI.Material;
 
@@ -10,13 +11,14 @@ public class ShopItemUI : MonoBehaviour
     [SerializeField] private MaterialInventory materialInventory;
     [SerializeField] private MoneySystem moneySystem;
     [SerializeField] private ShopItemSlotUI shoptItemPrefab;
+    [SerializeField] private PlayerStats playerStats;
 
     private void Start()
     {
         DrawShopItemSlot();
     }
 
-    private void DrawShopItemSlot()
+    public void DrawShopItemSlot()
     {
         foreach (Transform child in transform)
         {
@@ -31,7 +33,7 @@ public class ShopItemUI : MonoBehaviour
         {
             var itemUI = Instantiate(shoptItemPrefab, transform);
             var material = Material.GetFromNameOfMaterial(listOfMaterials[i]);
-            itemUI.Setup(material, materialInventory, moneySystem);
+            itemUI.Setup(material, materialInventory, moneySystem, playerStats.GetLevel());
         }
     }
     

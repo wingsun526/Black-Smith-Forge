@@ -18,4 +18,5 @@ MonoBehaviour:
   price: 1000
   craftingTime: 12
   fusionTimeHours: 6
+  unlockLevel: 6
   ranks: []

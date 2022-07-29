@@ -35,12 +35,12 @@ public class  DropdownUI : MonoBehaviour
 
     private void OnEnable()
     {
-        materialInventory.onInventoryChanged += ResetDropdownmenu;
+        materialInventory.OnInventoryChanged += ResetDropdownmenu;
     }
 
     private void OnDisable()
     {
-        materialInventory.onInventoryChanged -= ResetDropdownmenu;
+        materialInventory.OnInventoryChanged -= ResetDropdownmenu;
     }
 
     // Update is called once per frame

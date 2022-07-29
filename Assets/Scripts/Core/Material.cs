@@ -15,6 +15,7 @@ namespace UI
         [SerializeField] private int price;
         [SerializeField] private float craftingTime;
         [SerializeField] private float fusionTimeHours;
+        [SerializeField] private int unlockLevel;
         [SerializeField] private AllSwordsInThisRank[] ranks = null;
 
         private static Dictionary<string, Material> materialLookupCache;
@@ -75,6 +76,11 @@ namespace UI
         {
             return craftingTime;
         }
+        
+        public int GetUnlockLevel()
+        {
+            return unlockLevel;
+        }
         public Sword[] GetSwordsInThisRank(SwordRank swordRank)
         {
             BuildSwordLookUpTable();
@@ -96,10 +102,21 @@ namespace UI
         }
         
         // from interface
+        public string GetDisplayName()
+        {
+            return GetMaterialName();
+        }
+
         public Sprite GetDisplaySprite()
         {
             return GetMaterialSprite();
         }
+
+        public int GetDisplayOrder()
+        {
+            return GetSortingOrder();
+        }
+
         private static void BuildMaterialLookupCache()
         {
             if (materialLookupCache != null) return;

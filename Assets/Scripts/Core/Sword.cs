@@ -55,5 +55,10 @@ namespace UI
         {
             return sellPrice;
         }
+        
+        public int GetExp()
+        {
+            return givesEXP;
+        }
     }
 }

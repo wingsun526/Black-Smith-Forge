@@ -2,10 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using Core;
+using Player;
 using UnityEngine;
 
 public class DebugButtons : MonoBehaviour
 {
+    [SerializeField] private PlayerStats _playerStats;
+    
     const float baseScreenWidth = 257.0f;
     const float baseScreenHeight = 456.0f;
     const int buttonFontSize = 12;
@@ -43,6 +46,9 @@ public class DebugButtons : MonoBehaviour
             //
             // // or this,  if your code needs to be longer
             // new DebugButton("Boss", () => { EnemyManagerLocator.GetCurrentEnemyManager.SpawnBoss(); }),
+           
+            
+            
             
         });
     }

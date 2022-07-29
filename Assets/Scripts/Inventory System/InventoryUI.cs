@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private InventorySlotUI InventoryItemPrefab;
+    [SerializeField] private Button sellButton;
+    [SerializeField] private FlyingCoins flyingCoins;
 
 
     private void Awake()
@@ -19,6 +22,7 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         Redraw();
+        sellButton.onClick.AddListener(OnSellButtonClick);
     }
     
     public void OnOpenInventoryButtonClick()
@@ -28,12 +32,21 @@ public class InventoryUI : MonoBehaviour
 
     public void OnSellButtonClick()
     {
-        int index = InventorySlotUI.GetSelectedSlot();
-        if (index == -1) return;
-        playerInventory.SellFromInventory(index);
-        InventorySlotUI.ClearSelectedSlot();
+        bool sellSuccess = SellSelected();
+        if(sellSuccess)
+        {
+            flyingCoins.OnClickSendCoins(sellButton.transform);
+        }
     }
 
+    private bool SellSelected()
+    {
+        int index = InventorySlotUI.GetSelectedSlot();
+        if (index == -1) return false;
+        playerInventory.SellFromInventory(index);
+        InventorySlotUI.ClearSelectedSlot();
+        return true;
+    }
     
     private void Redraw()
     {
