@@ -22,12 +22,12 @@ namespace Core
             
         }
 
-        // possible race condtion
+        // possible race condition
         void Start()
         {
             SetupMaterialInventory();
             materialInventory["Copper"] = 30;
-            //materialInventory["Bronze"] = 5;
+            materialInventory["Bronze"] = 5;
         }
 
         
@@ -91,7 +91,7 @@ namespace Core
         }
 
 
-        public List<KeyValuePair<IDisplayableItem, int>> GetListOfItemsInOrder()
+        public List<KeyValuePair<IDisplayableItem, int>> GetListOfItemsForDisplay()
         {
             SetupMaterialInventory();
             var result = new List<KeyValuePair<IDisplayableItem, int>>();

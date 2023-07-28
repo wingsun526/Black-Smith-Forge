@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UI.General_UI
 {
-    public  class SingleSelectionItemUI : MonoBehaviour, IPointerClickHandler
+    public  class SingleSelectionItemUIPortrait : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private DisplayWindowUI displayWindowUI;
         
@@ -17,7 +17,7 @@ namespace UI.General_UI
         
         
         
-        [SerializeField] private int index;
+        [SerializeField] private int index; //position in inventory/grid
 
         private ItemSelectionGridUI parentGrid;
         private IDisplayableItem item;
@@ -25,9 +25,15 @@ namespace UI.General_UI
         
         public void Setup(DisplayWindowUI displayWindow, IDisplayableItem targetItem, int numberOfTargetItem, int index, ItemSelectionGridUI parent)
         {
+            if (targetItem == null) return;
+            
             displayWindowUI = displayWindow;
             item = targetItem;
+            itemImage.enabled = true;
             itemImage.sprite = item.GetDisplaySprite();
+            
+            
+
             count = numberOfTargetItem;
             this.index = index;
             parentGrid = parent;
@@ -36,15 +42,17 @@ namespace UI.General_UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (item == null) return;
+            
             if (parentGrid.GetSelectedItem() != null)
             {
-                parentGrid.GetSelectedItem().DeSelectItemVisually();
-                parentGrid.SetCurrentSelectedItemDisplayableOrderToNull();
+                parentGrid.GetSelectedItem().DeSelectItemVisually(); 
+                parentGrid.SetCurrentSelectedItemToNull();
             }
 
             
             SelectItemVisually();
-            parentGrid.AssignNewSelectedItem(this, count); //semi circular dependency, parentGrid only ever cache one "this"
+            parentGrid.AssignNewSelectedItem(this, count, index); //semi circular dependency, parentGrid only ever cache one "this"
             
         }
 

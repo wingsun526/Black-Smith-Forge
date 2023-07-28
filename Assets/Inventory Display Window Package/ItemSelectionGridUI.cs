@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI.General_UI;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -12,12 +13,23 @@ public class ItemSelectionGridUI : MonoBehaviour
     protected IInventory targetInventory;
 
     [SerializeField] private DisplayWindowUI targetDisplayWindow;
-    [SerializeField] private SingleSelectionItemUI itemPrefab;
+    [SerializeField] private SingleSelectionItemUIPortrait itemPrefab;
 
-    protected SingleSelectionItemUI selectedItem;
-    protected int? currentSelectedItemDisplayableOrder; // should be a UID , should be currentSelectedItemGUID, but for now displayableOrder should be unique.
+    protected SingleSelectionItemUIPortrait currentSelectedItemUIPortraitPortrait;
+    
+
+    protected int? currentSelectedItemIndex;
+    
+    
     protected virtual void Start()
     {
+        //
+        if (someInventory == null)
+        {
+            throw new Exception("no inventory assigned");
+        } 
+        //
+        
         targetInventory = (IInventory)someInventory.GetComponent(typeof(IInventory));
         if(targetInventory == null)
         {
@@ -29,27 +41,34 @@ public class ItemSelectionGridUI : MonoBehaviour
         
     }
 
-    public SingleSelectionItemUI GetSelectedItem()
+    public SingleSelectionItemUIPortrait GetSelectedItem()
     {
-        return selectedItem;
+        return currentSelectedItemUIPortraitPortrait;
     }
-    public void SetCurrentSelectedItemDisplayableOrderToNull()
+    public void SetCurrentSelectedItemToNull()
     {
-        currentSelectedItemDisplayableOrder = null;
+        currentSelectedItemIndex = null;
     }
-    public void AssignNewSelectedItem(SingleSelectionItemUI newItem, int numberOfItem)
+    public void AssignNewSelectedItem(SingleSelectionItemUIPortrait newItem, int numberOfItem, int index)
     {
-        selectedItem = newItem;
+        currentSelectedItemUIPortraitPortrait = newItem;
+        currentSelectedItemIndex = index;
+        
+        
         var displayableItem = newItem.GetDisplayableItem();
-        currentSelectedItemDisplayableOrder = displayableItem.GetDisplayOrder();
         DisplayNewItemInDisplayWindow(displayableItem, numberOfItem);
 
     }
-
-    private void ResetSelectedItem()
+    
+    public int? GetSelectedItemIndex()
     {
-        selectedItem = null;
-        currentSelectedItemDisplayableOrder = null;
+        return currentSelectedItemIndex;
+    }
+
+    public void ResetSelectedItem()
+    {
+        currentSelectedItemUIPortraitPortrait = null;
+        currentSelectedItemIndex = null;
         DisplayNewItemInDisplayWindow(null, -1);
     }
     private void DisplayNewItemInDisplayWindow(IDisplayableItem displayable, int info)
@@ -67,35 +86,17 @@ public class ItemSelectionGridUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        var listOfItems = targetInventory.GetListOfItemsForDisplay();
         
-        var listOfItems = targetInventory.GetListOfItemsInOrder();
-        //list should be already sorted.
 
-        bool selectedItemSeen = false;
         for (int i = 0; i < listOfItems.Count; i++)
         {
             var thePrefab = Instantiate(itemPrefab, transform);
             var theItem = listOfItems[i];
             thePrefab.Setup(targetDisplayWindow, theItem.Key, theItem.Value, i, this);
-            if(selectedItem != null)
-            {
-                
-                if (currentSelectedItemDisplayableOrder == theItem.Key.GetDisplayOrder())
-                {
-                    
-                    selectedItemSeen = true;
-                    selectedItem = thePrefab;// might need to also refresh displayableOrderCache
-                    thePrefab.SelectItemOnSetup();
-                    DisplayNewItemInDisplayWindow(theItem.Key, theItem.Value);
-                }
-            }
-            
+         
         }
 
-        if (!selectedItemSeen)
-        {
-            ResetSelectedItem();
-        }
     }
     
     

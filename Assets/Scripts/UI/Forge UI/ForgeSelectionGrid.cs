@@ -18,8 +18,8 @@ namespace UI.Forge_UI
         //buttons
         public string GetSelectedMaterialName()
         {
-            if (selectedItem == null) return null;
-            var matt = selectedItem.GetDisplayableItem();
+            if (currentSelectedItemUIPortraitPortrait == null) return null;
+            var matt = currentSelectedItemUIPortraitPortrait.GetDisplayableItem();
             var material = matt as Material;
             return material.GetMaterialName();
         }

@@ -15,7 +15,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Awake()
     {
-        playerInventory.inventoryUpdated += Redraw;
+        playerInventory.OnInventoryChanged += Redraw;
         DrawInventorySlots();
     }
 

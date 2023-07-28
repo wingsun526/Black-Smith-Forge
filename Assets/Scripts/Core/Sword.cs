@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
+using UI.General_UI;
 using UnityEngine;
 
 namespace UI
 {
+    /*
+     * is this the right way to you a scriptable object
+     */
+    
+    
     [CreateAssetMenu(fileName = "SwordName", menuName = "New Sword", order = 0)]
-    public class Sword : ScriptableObject
+    public class Sword : ScriptableObject, IDisplayableItem
     {
         [SerializeField] private string swordName;
         [SerializeField] private Sprite swordSprite;
@@ -60,5 +66,26 @@ namespace UI
         {
             return givesEXP;
         }
+
+        
+        #region IDisplayableItem
+
+        public string GetDisplayName()
+        {
+            return swordName;
+        }
+
+        public Sprite GetDisplaySprite()
+        {
+            return swordSprite;
+        }
+
+        public int GetDisplayOrder()
+        {
+            return -1; /* please change */
+        }
+
+        #endregion
+        
     }
 }

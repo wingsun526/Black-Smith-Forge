@@ -5,8 +5,8 @@ namespace UI.General_UI
 {
     public interface IInventory
     {
-        public List<KeyValuePair<IDisplayableItem, int>> GetListOfItemsInOrder();
         public event Action OnInventoryChanged;
+        public List<KeyValuePair<IDisplayableItem, int>> GetListOfItemsForDisplay();
         
     }
 }

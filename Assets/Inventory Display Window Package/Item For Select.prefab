@@ -94,6 +94,7 @@ MonoBehaviour:
   count: 0
   defaultPortrait: {fileID: 21300000, guid: 83069f538d9e0604a8bed52715d594c0, type: 3}
   selectedPortrait: {fileID: 21300000, guid: cf4d7722be4f1ec4dabe5448fd326a27, type: 3}
+  index: 0
 --- !u!1001 &6089359335325503203
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101,6 +102,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2408050111417659829}
     m_Modifications:
+    - target: {fileID: 8496846485042498537, guid: 381fe885f00c37448ad4229c48e09a5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496846485042498537, guid: 381fe885f00c37448ad4229c48e09a5b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8496846485042498538, guid: 381fe885f00c37448ad4229c48e09a5b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -202,7 +211,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 6089359335325503203}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
