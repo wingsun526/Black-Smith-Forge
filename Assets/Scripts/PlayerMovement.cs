@@ -14,27 +14,20 @@ public class PlayerMovement : MonoBehaviour
     
     private Vector2 moveInput;
     private Animator myAnimator;
-  
     private Rigidbody2D myRigidbody2D;
-    private SpriteRenderer mySpriteRenderer;
     private Vector2 mouseWorldPosition;
 
-    //
-    private Vector2 weaponRotateDirection;
-
-    private Vector3 playerCurrentVelocity;
+    private Interactable currentCollidingInteractable;
+    
     void Start()
     {
         myAnimator = GetComponent<Animator>();
         
         myRigidbody2D = GetComponent<Rigidbody2D>();
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        
+       
     }
 
-    private void FixedUpdate()
-    {
-        playerCurrentVelocity = myRigidbody2D.velocity;
-    }
 
     void Update()
     {
@@ -46,17 +39,16 @@ public class PlayerMovement : MonoBehaviour
    
 
 
-    void OnMove(InputValue value)
+    private void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
     }
-   
 
+    private void OnInteract()
+    {
+        currentCollidingInteractable.startInteract();
+    }
    
-
-   
-
-    
 
     private void Run()
     {
@@ -74,13 +66,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (mouseWorldPosition.x > myRigidbody2D.position.x)
         {
-            transform.localScale = new Vector3(5, 5, 5);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else if (mouseWorldPosition.x < myRigidbody2D.position.x)
         {
-            transform.localScale = new Vector3(-5, 5, 5);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        Interactable interactable = col.gameObject.GetComponent<Interactable>();
+        if(interactable != null)
+        {
+            currentCollidingInteractable = interactable;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        currentCollidingInteractable = null; /* only interactable class should set this back to null */
+    }
 }
