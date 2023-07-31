@@ -17,7 +17,7 @@ namespace UI.General_UI
         
         
         
-        [SerializeField] private int index; //position in inventory/grid
+        [SerializeField] private int index; // position in inventory or grid
 
         private ItemSelectionGridUI parentGrid;
         private IDisplayableItem item;

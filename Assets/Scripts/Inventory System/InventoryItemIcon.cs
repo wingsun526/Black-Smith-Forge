@@ -19,7 +19,7 @@ public class InventoryItemIcon : MonoBehaviour
         else
         {
             iconImage.enabled = true;
-            iconImage.sprite = sword.GetSwordSprite();
+            iconImage.sprite = sword.GetDisplaySprite();
         }
     }
 }

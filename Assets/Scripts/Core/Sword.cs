@@ -52,10 +52,7 @@ namespace UI
             return swordName;
         }
         
-        public Sprite GetSwordSprite()
-        {
-            return swordSprite;
-        }
+        
         
         public int GetSellPrice()
         {

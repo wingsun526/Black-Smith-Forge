@@ -44,10 +44,7 @@ public class PlayerMovement : MonoBehaviour
         moveInput = value.Get<Vector2>();
     }
 
-    private void OnInteract()
-    {
-        currentCollidingInteractable.startInteract();
-    }
+    
    
 
     private void Run()
@@ -74,6 +71,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    #region Interactions with Interactable
+
+    private void OnInteract()
+    {
+        if (currentCollidingInteractable == null) return;
+        currentCollidingInteractable.StartInteract();
+    }
     private void OnCollisionEnter2D(Collision2D col)
     {
         Interactable interactable = col.gameObject.GetComponent<Interactable>();
@@ -85,6 +89,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
+        if (currentCollidingInteractable == null) return;
+        
+        currentCollidingInteractable.StopInteract();
         currentCollidingInteractable = null; /* only interactable class should set this back to null */
     }
+
+    #endregion
+    
 }

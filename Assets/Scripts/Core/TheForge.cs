@@ -87,7 +87,7 @@ public class TheForge : MonoBehaviour
         playerStats.GainExp(sword.GetExp());
         
         
-        productSwordImage.sprite = sword.GetSwordSprite();
+        productSwordImage.sprite = sword.GetDisplaySprite();
         //forgeButton.interactable = true;
         
         // button's color return back to normal

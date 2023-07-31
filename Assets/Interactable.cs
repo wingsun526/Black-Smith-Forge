@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
-    public void startInteract()
-    {
-        Debug.Log($"interacting with {gameObject.name}");
-    }
+
+    public abstract void StartInteract();
+    public abstract void StopInteract();
+
+
 }

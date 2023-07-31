@@ -7,18 +7,33 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
-    
-    // when button click, ask ui for user input
-    // do something to the inventory
-
     [SerializeField] private ItemSelectionGridUI itemSelectionGridUI;
     [SerializeField] private PlayerInventory targetInventory;
 
-    [SerializeField] private SalesTable salesTable;
+    //Interaction with SalesTable
+    private static SalesTable _currentlyConnectedSalesTable;
+    public void RegisterThis(SalesTable incomingSalesTableObject)
+    {
+        _currentlyConnectedSalesTable = incomingSalesTableObject;
+        transform.root.gameObject.SetActive(true);
+    }
     
+    public void DeRegisterThis()
+    {
+        itemSelectionGridUI.ResetGrid();
+        _currentlyConnectedSalesTable = null;
+        transform.root.gameObject.SetActive(false);
+    }
+    //End of SalesTable Interactions
     
+
     public void ButtonOnePlace()
     {
+        if (_currentlyConnectedSalesTable == null)
+        {
+            throw new Exception("did the UI active without triggering?");
+        } 
+        
         var nullableIndex = itemSelectionGridUI.GetSelectedItemIndex();
         
         if(nullableIndex == null)
@@ -32,11 +47,11 @@ public class InventoryController : MonoBehaviour
         Sword inventorySword = targetInventory.GetSwordOutOfThisSlot(index);
         
         
-        Sword TableSword = salesTable.ChangeItemOnDisplay(inventorySword);
+        Sword TableSword = _currentlyConnectedSalesTable.ChangeItemOnDisplay(inventorySword);
         targetInventory.PlaceSwordInThisSlot(index, TableSword);
 
 
-        itemSelectionGridUI.ResetSelectedItem();
+        itemSelectionGridUI.AssignNewSelectedItem();
 
 
     }

@@ -15,7 +15,7 @@ public class ItemSelectionGridUI : MonoBehaviour
     [SerializeField] private DisplayWindowUI targetDisplayWindow;
     [SerializeField] private SingleSelectionItemUIPortrait itemPrefab;
 
-    protected SingleSelectionItemUIPortrait currentSelectedItemUIPortraitPortrait;
+    protected SingleSelectionItemUIPortrait currentSelectedItemUIPortrait;
     
 
     protected int? currentSelectedItemIndex;
@@ -43,34 +43,44 @@ public class ItemSelectionGridUI : MonoBehaviour
 
     public SingleSelectionItemUIPortrait GetSelectedItem()
     {
-        return currentSelectedItemUIPortraitPortrait;
+        return currentSelectedItemUIPortrait;
     }
     public void SetCurrentSelectedItemToNull()
     {
         currentSelectedItemIndex = null;
     }
+    
+    public void ResetGrid()
+    {
+        DrawItems();
+        AssignNewSelectedItem();
+    }
+    
+    public void AssignNewSelectedItem()
+    {
+        currentSelectedItemUIPortrait = null;
+        currentSelectedItemIndex = null;
+        
+        DisplayNewItemInDisplayWindow(null, -1); /* change -1 (place holder) */
+    }
     public void AssignNewSelectedItem(SingleSelectionItemUIPortrait newItem, int numberOfItem, int index)
     {
-        currentSelectedItemUIPortraitPortrait = newItem;
+        currentSelectedItemUIPortrait = newItem;
         currentSelectedItemIndex = index;
-        
         
         var displayableItem = newItem.GetDisplayableItem();
         DisplayNewItemInDisplayWindow(displayableItem, numberOfItem);
 
     }
     
+    
+    
     public int? GetSelectedItemIndex()
     {
         return currentSelectedItemIndex;
     }
 
-    public void ResetSelectedItem()
-    {
-        currentSelectedItemUIPortraitPortrait = null;
-        currentSelectedItemIndex = null;
-        DisplayNewItemInDisplayWindow(null, -1);
-    }
+    
     private void DisplayNewItemInDisplayWindow(IDisplayableItem displayable, int info)
     {
         if (targetDisplayWindow == null) return;
@@ -79,7 +89,7 @@ public class ItemSelectionGridUI : MonoBehaviour
     
         
     
-    protected void DrawItems()
+    protected void DrawItems() //trigger when ever inventory change
     {
         foreach (Transform child in transform)
         {
